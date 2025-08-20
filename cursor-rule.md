@@ -1,0 +1,1 @@
+Always read CLAUDE.md before starting any task. Read all CLAUDE.md files in the current path down to project root dir. Example: if you are working with files in <project-dir>/frontend/components, read CLAUDE.md residing in <project-dir>/CLAUDE.md , <project-dir>/frontend/CLAUDE.md, and <project-dir>/frontend/components/CLAUDE.md if they exist.
