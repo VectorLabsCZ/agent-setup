@@ -407,3 +407,141 @@ Tips:
 - Start with Template 1–4 and remove sections you do not need.
 - Keep tags to `<instructions>`, `<context>`, `<output_format>` and optional `<system_role>`.
 - Put detailed guidance inside `<instructions>` using Markdown headings and lists.
+
+## Agent Prompt Structure (Complex Systems)
+
+For complex agent prompts with multiple content types (workflows, templates, guidelines, tools), **semantic separation is crucial** for maintainability, navigation, and processing efficiency. Unlike simple task prompts, agent prompts benefit from multiple semantic tags rather than cramming everything into `<instructions>`.
+
+### When to Use Semantic Separation
+
+Use semantic separation for agent prompts when you have:
+- Multiple distinct content types (identity, workflows, templates, constraints)
+- Complex operational procedures with 5+ steps
+- Reusable components (templates, examples, standards)
+- Integration guidance for multiple tools
+- Quality standards and validation criteria
+
+### Good Agent Prompt Structure
+
+```xml
+<system_role>
+You are a senior product manager specializing in B2B SaaS products. You excel at discovery, requirements gathering, and creating clear, actionable PRDs.
+</system_role>
+
+<core_principles>
+- Always gather missing information through direct user engagement
+- Prioritize user outcomes over feature lists
+- Base decisions on data and user feedback
+- Maintain clear traceability from problem to solution
+</core_principles>
+
+<workflow>
+## Discovery Phase
+1. Identify stakeholders and their contexts
+2. Understand problem space and user pain points
+3. Define success metrics and constraints
+
+## Requirements Phase
+1. Prioritize features based on impact/effort matrix
+2. Create detailed user stories with acceptance criteria
+3. Define technical requirements and dependencies
+
+## Documentation Phase
+1. Create comprehensive PRD using standard template
+2. Review with stakeholders for alignment
+3. Update project tracking in Linear
+</workflow>
+
+<templates>
+## PRD Template
+### Problem Statement
+- User problem: [specific pain point]
+- Business impact: [quantified effect]
+
+### Solution Overview
+- Core functionality: [high-level description]
+- Success metrics: [measurable outcomes]
+
+### Detailed Requirements
+- User stories: [As a... I want... So that...]
+- Acceptance criteria: [Given/When/Then format]
+</templates>
+
+<quality_standards>
+- All PRDs must include quantified success metrics
+- User stories must follow standard format
+- Dependencies must be explicitly documented
+- Technical feasibility must be validated
+</quality_standards>
+
+<integration_guides>
+## Linear Integration
+- Create epics for major features
+- Link user stories to epics
+- Set proper priority and effort estimates
+- Tag stakeholders for review
+
+## Research Tools
+- Use UserVoice for customer feedback analysis
+- Reference analytics for usage patterns
+- Validate assumptions with user interviews
+</integration_guides>
+
+<success_criteria>
+- Stakeholders can clearly articulate the problem and solution
+- Technical team understands implementation requirements
+- Success metrics are measurable and time-bound
+- All dependencies and risks are identified
+</success_criteria>
+```
+
+### Anti-Pattern for Agent Prompts
+
+**Don't do this** - wrapping everything in a single `<instructions>` tag:
+
+```xml
+<instructions>
+You are a senior product manager. Follow these principles: gather info, prioritize users, use data. Your workflow is: 1) Discovery - identify stakeholders, understand problems, define metrics. 2) Requirements - prioritize features, create stories, define tech needs. 3) Documentation - create PRD, review with stakeholders, update Linear. Use this PRD template: Problem Statement with user problem and business impact, Solution Overview with functionality and metrics, Requirements with user stories and criteria. Quality standards: quantified metrics, standard story format, documented dependencies, validated feasibility. For Linear: create epics, link stories, set priority, tag stakeholders. Success criteria: clear problem/solution articulation, understood requirements, measurable metrics, identified dependencies.
+</instructions>
+```
+
+**Problems with the anti-pattern:**
+- Poor navigation and maintainability
+- Difficult to update specific sections
+- Harder for models to parse different content types
+- Reduces reusability of components
+- Makes validation and quality control harder
+
+### Semantic Tags for Agent Prompts
+
+| Tag | Purpose | Content |
+|-----|---------|---------|
+| `<system_role>` | Identity and expertise | Who the agent is, core competencies |
+| `<core_principles>` | Guiding rules | Fundamental beliefs that shape all decisions |
+| `<workflow>` | Operational steps | Phase-by-phase process with clear sequences |
+| `<templates>` | Reusable structures | Standard formats for documents, communications |
+| `<quality_standards>` | Constraints and validation | Requirements that outputs must meet |
+| `<integration_guides>` | Tool usage | How to work with external systems and tools |
+| `<success_criteria>` | Validation measures | How to determine if objectives are met |
+
+### Benefits of Semantic Structure
+
+1. **Maintainability**: Easy to update specific sections without affecting others
+2. **Navigation**: Clear organization helps both humans and models find relevant information
+3. **Reusability**: Templates and standards can be referenced and reused
+4. **Modularity**: Different aspects of the agent can be developed independently
+5. **Validation**: Quality standards and success criteria are clearly separated
+6. **Processing Efficiency**: Models can better understand the purpose of each section
+
+### Migration from Single-Tag Structure
+
+When refactoring an existing agent prompt:
+
+1. **Identify content types** in the current `<instructions>` block
+2. **Extract semantic sections** using appropriate tags
+3. **Organize workflow steps** into logical phases
+4. **Separate templates** and reusable components
+5. **Clarify quality standards** and success criteria
+6. **Document tool integrations** separately
+
+This approach is especially important for complex agents that need to maintain consistency across multiple interactions and integrate with various external systems.
