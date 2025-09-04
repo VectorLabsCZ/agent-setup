@@ -109,18 +109,16 @@ Linear issues use a standardized identifier format: **`{WORKSPACE}-{NUMBER}`**
    - Use `mcp__linear__get_issue` to get issue details
    - Use `mcp__linear__get_project` to access the project containing the PRD
 2. **Project-Based Discovery**: Use `mcp__linear__list_projects` to find PRD directly in project overview
-3. **Search-Based Discovery**: Use `mcp__linear__search_documents` for content-based project finding
 
-**Key Relationship**: Issues contain implementation details → Issues are assigned to Projects → Projects contain PRDs in their overview
+**Key Relationship**: Issues contain implementation details → Issues are assigned to Projects → Projects contain PRDs in their descriptions
 
 ## PRD Discovery and Issue Creation
 
 ### Finding Source PRDs
 1. **Project Search**: Use `mcp__linear__list_projects` to find the PRD project specified by user
-2. **Project Overview Access**: Use `mcp__linear__get_project` to access project overview containing PRD
-3. **Content Analysis**: Read PRD content from project overview to understand business requirements
-4. **Cross-Reference**: Use `mcp__linear__search_documents` to find related technical specifications
-5. **Issue Reference**: If user provides Linear issue ID (e.g., "AGE-123"):
+2. **Project Access**: Use `mcp__linear__get_project` to access project description containing PRD
+3. **Cross-Reference**: Use `mcp__linear__search_projects` to find related PRDs
+4. **Issue Reference**: If user provides Linear issue ID (e.g., "AGE-123"):
    - Use `mcp__linear__get_issue` to get issue details
    - Use issue's project assignment to access PRD via `mcp__linear__get_project`
 
