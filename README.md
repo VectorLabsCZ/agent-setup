@@ -26,7 +26,7 @@ Copy whatever agent you need into your local agents or user-space agents. Follow
 
 ### Configuration
 
-The repository includes an optional `.mcp.json` configuration file that provides enhanced integrations:
+The repository includes a `.mcp.json` configuration file that provides enhanced integrations:
 
 | MCP Server | Type | Purpose |
 |------------|------|---------|
@@ -45,11 +45,11 @@ Agents are invoked directly in Claude Code using their configured names:
 
 ```bash
 # Example agent invocations
-@agent-architect      # Create technical specifications from PRDs
-@agent-documenter     # Generate comprehensive project documentation
-@agent-product-manager # Create Product Requirements Documents
-@agent-prompt-improver # Optimize AI prompts following best practices
-@agent-research-specialist # Research technical solutions and documentation
+@architect      # Create technical specifications from PRDs
+@documenter     # Generate comprehensive project documentation
+@product-manager # Create Product Requirements Documents
+@prompt-improver # Optimize AI prompts following best practices
+@research-specialist # Research technical solutions and documentation
 ```
 
 ## Project Structure
@@ -64,6 +64,7 @@ agent-setup/
 ├── prompt-improver.md          # Prompt optimization agent
 ├── research-specialist.md      # Technical research agent
 └── design-workflows/           # Automated design review workflows
+    ├── LICENSE                # Workflow license
     ├── README.md              # Workflow overview
     └── design-review/         # Design review templates and examples
         ├── README.md
@@ -130,7 +131,7 @@ The repository includes a comprehensive design review workflow that provides aut
 **Usage:**
 ```bash
 # Use specialized design review agent
-@agent-code-reviewer
+@design-review
 ```
 
 ## Configuration Guidelines
