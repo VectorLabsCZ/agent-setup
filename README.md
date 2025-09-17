@@ -2,7 +2,7 @@
 
 ## Overview
 
-Agent Setup is a comprehensive collection of specialized AI agent configurations and design workflows for Claude Code. This repository provides pre-configured agents for common development tasks including architecture design, documentation generation, product management, prompt optimization, and research, along with automated design review workflows for maintaining UI/UX quality.
+Agent Setup is a comprehensive collection of specialized AI agent configurations and design workflows for Claude Code. This repository provides pre-configured agents organized by system integration (Linear, Asana, Local) for common development tasks including architecture design, documentation generation, product management, prompt optimization, and research, along with automated design review workflows for maintaining UI/UX quality.
 
 ## Technology Stack
 
@@ -39,17 +39,46 @@ The repository includes a `.mcp.json` configuration file that provides enhanced 
 
 **Note:** API keys and authentication tokens need to be configured separately for each MCP server.
 
+## System Organization
+
+Agents are organized by system integration to provide specialized workflows that match your team's preferred tools:
+
+### Linear Integration (`linear/`)
+- **Target Users:** Teams using Linear for project management and issue tracking
+- **Key Features:** Direct integration with Linear issues, automatic linking, and Linear-specific workflows
+- **Use Cases:** Creating PRDs and technical specs that automatically sync with Linear issues
+
+### Asana Integration (`asana/`) - Coming Soon
+- **Target Users:** Teams using Asana for project management
+- **Key Features:** Asana task integration, project templates, and Asana-specific workflows
+- **Use Cases:** PRD and specification creation with Asana project alignment
+
+### Local Integration (`local/`) - Coming Soon
+- **Target Users:** Teams preferring local development without external project management tools
+- **Key Features:** File-based organization, local git integration, markdown-based workflows
+- **Use Cases:** Self-contained development workflows for smaller teams or personal projects
+
 ### Usage
 
 Agents are invoked directly in Claude Code using their configured names:
 
 ```bash
 # Example agent invocations
-@architect      # Create technical specifications from PRDs
+
+# Linear-integrated agents
+@linear/architect      # Create technical specifications from PRDs (Linear integration)
+@linear/product-manager # Create Product Requirements Documents (Linear integration)
+
+# General-purpose agents
 @documenter     # Generate comprehensive project documentation
-@product-manager # Create Product Requirements Documents
 @prompt-improver # Optimize AI prompts following best practices
 @research-specialist # Research technical solutions and documentation
+
+# Future integrations (coming soon)
+# @asana/architect     # Asana-integrated architecture agent
+# @asana/product-manager # Asana-integrated product management agent
+# @local/architect     # Local system architecture agent
+# @local/product-manager # Local system product management agent
 ```
 
 ## Project Structure
@@ -57,12 +86,15 @@ Agents are invoked directly in Claude Code using their configured names:
 ```
 agent-setup/
 ├── .mcp.json                    # MCP server configuration
-├── architect.md                 # Technical specification agent
 ├── cursor-rule.md              # Development guidelines
 ├── documenter.md               # Documentation generation agent
-├── product-manager.md          # PRD creation agent
 ├── prompt-improver.md          # Prompt optimization agent
 ├── research-specialist.md      # Technical research agent
+├── linear/                     # Linear-integrated agents
+│   ├── architect.md            # Technical specification agent (Linear integration)
+│   └── product-manager.md      # PRD creation agent (Linear integration)
+├── asana/                      # Asana-integrated agents (coming soon)
+├── local/                      # Local system agents (coming soon)
 └── design-workflows/           # Automated design review workflows
     ├── LICENSE                # Workflow license
     ├── README.md              # Workflow overview
@@ -76,35 +108,47 @@ agent-setup/
 
 ## Core Agents
 
-### Architect Agent (`architect.md`)
-**Purpose:** Creates detailed technical specifications from Product Requirements Documents (PRDs)
+### System-Integrated Agents
+
+#### Linear Integration
+
+##### Architect Agent (`linear/architect.md`)
+**Purpose:** Creates detailed technical specifications from Product Requirements Documents (PRDs) with Linear integration
 - Transforms PRDs into implementation-ready technical blueprints
 - Supports both single comprehensive specs and multi-role specifications
 - Includes complete API definitions, database schemas, and testing strategies
 - Maintains cross-specification coordination for complex features
+- Integrates with Linear for issue tracking and project management
 
-### Documenter Agent (`documenter.md`)
+##### Product Manager Agent (`linear/product-manager.md`)
+**Purpose:** Creates comprehensive Product Requirements Documents from user ideas with Linear integration
+- Structured requirements gathering with validated user feedback
+- Complete PRD generation with user flows and acceptance criteria
+- Integration with existing systems analysis
+- Maintains PRD index for conflict detection and organization
+- Seamless Linear integration for issue creation and tracking
+
+#### Future Integrations
+- **Asana Integration:** Similar architecture and product management agents optimized for Asana workflows
+- **Local System Integration:** Agents designed for local development environments without external dependencies
+
+### General-Purpose Agents
+
+#### Documenter Agent (`documenter.md`)
 **Purpose:** Generates comprehensive technical documentation through codebase analysis
 - Reverse-engineers project structure and technology stack
 - Creates detailed README files with setup instructions and API documentation
 - Extracts functionality from actual code without placeholder content
 - Supports multiple project types and architectural patterns
 
-### Product Manager Agent (`product-manager.md`)
-**Purpose:** Creates comprehensive Product Requirements Documents from user ideas
-- Structured requirements gathering with validated user feedback
-- Complete PRD generation with user flows and acceptance criteria
-- Integration with existing systems analysis
-- Maintains PRD index for conflict detection and organization
-
-### Prompt Improver Agent (`prompt-improver.md`)
+#### Prompt Improver Agent (`prompt-improver.md`)
 **Purpose:** Optimizes AI prompts following established best practices
 - Minimal XML tagging approach for maximum clarity
 - Structured templates for complex use cases
 - Measurable requirements and quality standards
 - Support for various prompt types (technical, analysis, creative)
 
-### Research Specialist Agent (`research-specialist.md`)
+#### Research Specialist Agent (`research-specialist.md`)
 **Purpose:** Finds current solutions for non-trivial technical challenges
 - Prioritizes Context7 MCP and GitHub MCP for latest documentation
 - Curates actionable examples over theoretical explanations
@@ -151,11 +195,13 @@ The repository includes a comprehensive design review workflow that provides aut
 
 The repository supports an AI-native development approach:
 
-1. **Requirements Gathering:** Use `@product-manager` to create comprehensive PRDs
-2. **Technical Planning:** Use `@architect` to generate implementation specifications
+1. **Requirements Gathering:** Use `@linear/product-manager` (or your preferred system integration) to create comprehensive PRDs
+2. **Technical Planning:** Use `@linear/architect` (or your preferred system integration) to generate implementation specifications
 3. **Research Phase:** Use `@research-specialist` for technical challenge resolution
 4. **Implementation:** Follow specifications with design review integration
 5. **Documentation:** Use `@documenter` to generate comprehensive project documentation
+
+**System Selection:** Choose the appropriate system integration (Linear, Asana, or Local) based on your project's workflow requirements.
 
 ## Success Metrics
 
