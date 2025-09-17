@@ -53,9 +53,10 @@ Agents are organized by system integration to provide specialized workflows that
 - **Key Features:** Asana task integration, project templates, and Asana-specific workflows
 - **Use Cases:** PRD and specification creation with Asana project alignment
 
-### Local Integration (`local/`) - Coming Soon
+### Local Integration (`local/`)
 - **Target Users:** Teams preferring local development without external project management tools
-- **Key Features:** File-based organization, local git integration, markdown-based workflows
+- **Key Features:** File-based organization, chronological naming with YYYY-MM prefixes, markdown-based workflows
+- **File Structure:** PRDs stored in `prds/` folder, implementation tasks in `tasks/[prd-name]/` folders
 - **Use Cases:** Self-contained development workflows for smaller teams or personal projects
 
 ### Usage
@@ -74,11 +75,13 @@ Agents are invoked directly in Claude Code using their configured names:
 @prompt-improver # Optimize AI prompts following best practices
 @research-specialist # Research technical solutions and documentation
 
+# Local system agents (file-based workflow)
+@local/architect      # Local file system architecture agent
+@local/product-manager # Local file system product management agent
+
 # Future integrations (coming soon)
 # @asana/architect     # Asana-integrated architecture agent
 # @asana/product-manager # Asana-integrated product management agent
-# @local/architect     # Local system architecture agent
-# @local/product-manager # Local system product management agent
 ```
 
 ## Project Structure
@@ -93,8 +96,10 @@ agent-setup/
 ├── linear/                     # Linear-integrated agents
 │   ├── architect.md            # Technical specification agent (Linear integration)
 │   └── product-manager.md      # PRD creation agent (Linear integration)
+├── local/                      # Local file system agents
+│   ├── architect.md            # Technical specification agent (file system)
+│   └── product-manager.md      # PRD creation agent (file system)
 ├── asana/                      # Asana-integrated agents (coming soon)
-├── local/                      # Local system agents (coming soon)
 └── design-workflows/           # Automated design review workflows
     ├── LICENSE                # Workflow license
     ├── README.md              # Workflow overview
@@ -128,9 +133,26 @@ agent-setup/
 - Maintains PRD index for conflict detection and organization
 - Seamless Linear integration for issue creation and tracking
 
+#### Local Integration
+
+##### Architect Agent (`local/architect.md`)
+**Purpose:** Creates detailed technical specifications based on PRDs with local file system organization
+- Transforms PRDs into implementation-ready task files stored in `tasks/[prd-name]/` folders
+- Uses natural file naming and category-based organization for clarity
+- Includes complete technical specifications with cross-file coordination
+- Maintains traceability through file references and markdown links
+- No external dependencies - works entirely with local file system
+
+##### Product Manager Agent (`local/product-manager.md`)
+**Purpose:** Creates comprehensive Product Requirements Documents using local file system storage
+- Structured requirements gathering with YYYY-MM chronological naming
+- Complete PRD generation stored as markdown files in `prds/` folder
+- File-based state persistence through Agent Session Log embedded in documents
+- Easy discovery and organization through consistent file naming conventions
+- Seamless handoff to architect agent through file system references
+
 #### Future Integrations
 - **Asana Integration:** Similar architecture and product management agents optimized for Asana workflows
-- **Local System Integration:** Agents designed for local development environments without external dependencies
 
 ### General-Purpose Agents
 
@@ -186,22 +208,40 @@ The repository includes a comprehensive design review workflow that provides aut
 3. **MCP Integration:** Configure relevant MCP servers based on your development stack
 
 ### Best Practices
-- Store PRDs in `prds/` folder with descriptive kebab-case filenames
-- Maintain `prds/index.md` for PRD organization and conflict detection
-- Store technical specifications in `specs/` folder
+
+#### For Linear Integration
+- Use Linear projects as primary PRD containers
+- Maintain clear project-to-issues relationships
+- Apply consistent labeling per project CLAUDE.md guidelines
+
+#### For Local Integration
+- Store PRDs in `prds/` folder with YYYY-MM-descriptive-name.md format
+- Store technical specifications in `tasks/[prd-name]/` folders
+- Use natural file naming for tasks (e.g., `backend_auth_api.md`)
+- Maintain cross-references between PRD and task files for traceability
+
+#### General
 - Use consistent naming conventions across documentation
+- Maintain CLAUDE.md files for project-specific guidelines
 
 ## Development Workflow
 
 The repository supports an AI-native development approach:
 
-1. **Requirements Gathering:** Use `@linear/product-manager` (or your preferred system integration) to create comprehensive PRDs
-2. **Technical Planning:** Use `@linear/architect` (or your preferred system integration) to generate implementation specifications
+1. **Requirements Gathering:** Use your preferred system integration to create comprehensive PRDs:
+   - `@linear/product-manager` for Linear-integrated workflows
+   - `@local/product-manager` for local file-based workflows
+2. **Technical Planning:** Use your preferred system integration to generate implementation specifications:
+   - `@linear/architect` for Linear-integrated workflows
+   - `@local/architect` for local file-based workflows
 3. **Research Phase:** Use `@research-specialist` for technical challenge resolution
 4. **Implementation:** Follow specifications with design review integration
 5. **Documentation:** Use `@documenter` to generate comprehensive project documentation
 
-**System Selection:** Choose the appropriate system integration (Linear, Asana, or Local) based on your project's workflow requirements.
+**System Selection:** Choose the appropriate system integration based on your project's workflow requirements:
+- **Linear:** For teams using Linear project management
+- **Local:** For teams preferring file-based workflows without external dependencies
+- **Asana:** Coming soon for teams using Asana project management
 
 ## Success Metrics
 
