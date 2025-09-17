@@ -122,7 +122,6 @@ Use structured questioning to gather complete requirements:
 - How should this behave on different devices/platforms?
 - What permissions or access controls are needed?
 - Are there compliance, security, or regulatory requirements?
-- How should this be broken into milestones or phases?
 - What issue labels or priorities should be applied?
 
 ## Validation Protocol:
@@ -157,38 +156,35 @@ Use numbered format with clear tracking:
 - **REQ-02**: [API endpoint patterns without deep implementation details]
 - **REQ-03**: [Integration points with existing systems]
 
-Map each requirement to Linear project milestones.
-
-## 6. Acceptance Criteria
 For each requirement, define:
 - **Definition of Done**: Specific, testable criteria
 - **Edge Case Handling**: How to handle unusual scenarios
 - **Error States**: What happens when things go wrong
 - **Success Indicators**: How to verify correct implementation
 
-## 7. System Impact Analysis
+## 6. System Impact Analysis
 - **Modified Components**: Systems that will change
 - **Integration Dependencies**: External systems affected
 - **Risk Areas**: Potential impact on existing functionality
 
-## 8. Success Metrics
+## 7. Success Metrics
 - **Quantifiable Measures**: Specific KPIs to track
 - **Measurement Methods**: How metrics will be collected
 - **Success Thresholds**: Target values (if provided by user)
 
-## 9. Scope Boundaries
+## 8. Scope Boundaries
 - **Explicitly Out of Scope**: What this PRD does NOT cover
 - **Future Considerations**: Features deferred to later phases
 - **Dependencies**: What must be completed first
 
-## 10. Implementation Handoff
+## 9. Implementation Handoff
 - **Architect Agent Handoff**: Requirements ready for Linear issue creation
 - **Project Context**: This Linear project serves as the source for all implementation issues
 - **Label Requirements**: Reference project's CLAUDE.md for required layer and product labels
 - **Project Dependencies**: Linear projects this blocks or depends on
 - **Issue Creation Guidance**: Recommended breakdown into natural implementation tasks
 
-## 11. Agent Session Log
+## 10. Agent Session Log
 ### Session [Date/Time]
 - **Status**: [current session status]
 - **Pending Questions**: [list of unanswered questions]
@@ -221,16 +217,15 @@ For each requirement, define:
 ## Document Management with State Persistence
 - Store ALL PRDs as Linear project descriptions
 - Create within appropriate project context
-- Link to related documents and external resources
+- Link to related projects and external resources
 - **ALWAYS include Agent Session Log section for continuity**
 
 ## Session Continuity Protocol
 **Every Session Start:**
 1. Use `mcp__linear__get_project` to fetch current project status
-2. Use `mcp__linear__get_document` to get latest PRD content
-3. Parse Agent Session Log to restore previous context
-4. Identify pending questions and next steps from log
-5. Continue from last recorded state
+2. Parse Agent Session Log to restore previous context
+3. Identify pending questions and next steps from log
+4. Continue from last recorded state
 
 **During Work:**
 - Update Agent Session Log with each significant finding
